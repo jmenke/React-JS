@@ -116,10 +116,34 @@ Elemente können wie HTML Tags geschrieben werden und dann mit {} initialisiert 
 # Nutzbare React-Komponenten erstellen
 	
 - Es ist möglich eigene Komponenten mit Hilfe von React zu erstellen
-- Man Speichert eine prop-Funktion, die einen React-Element zurückgibt
-- Variable muss mit einem Großbuchstaben anfangen! (Babel-Transpiler)
+- Man speichert eine __prop-Funktion__, die einen React-Element zurückgibt
+```javascript
+	const Message = props => (<div>{props.children}</div>)
+```
+- Variable muss mit einem Großbuchstaben anfangen! (__Babel-Transpiler__)
 - Dann kann man mithilfe von JSX diese Komponente als Tag benutzen
  
+---
+
+# Beispiel 3.1
+```javascript
+const Message = props => (
+  <div>{props.children}</div>
+)
+const element = (
+  <div className="container">
+    <Message>
+      Hello World
+      <Message>Goodbye World</Message>
+    </Message>
+  </div>
+)
+ReactDOM.render(element, rootElement)
+```
+Nutzung dann einfach über 
+```javascript
+<VariablenName>
+```
 ---
 # Fazit
 
