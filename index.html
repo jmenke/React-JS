@@ -83,15 +83,33 @@ Element wird mit React erzeugt und anschließen auf dem Rootelement gerendert.
 	<script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
 ```
 - script type="text/babel"
-- Syntax: __```html <typ className="Name">children</typ> ```__
+- Syntax: 
+```html
+ <typ className="Name">children</typ> 
+ ```
 - oder {} -> erlaubt es, hier __Javascript__ auszuführen
-- z.B. ein props-Objekt in Javascript mit dem Klassennamen und Kinder, wird übergeben mit __```html <typ {...props} /> ```__
+- z.B. ein props-Objekt in Javascript mit dem Klassennamen und Kinder, wird übergeben mit: 
+```html
+ <typ {...props} /> 
+ ```
 - wenn man Properties von außerhalb hinzufügt:
 	- eigene Props __links__ von den fremden Props werden benutzt, falls __keine vorhanden__ sind
 	- die Props __rechts__ davon __überschreiben__ die mitgelieferten
 ---
 
-# Test
+# Beispiel 2.1
+
+```javascript
+const content = 'Hello World'
+const myClassName = 'container'
+const props = {
+  className: 'container',
+  children: 'Hello World',
+}
+const element = <div {...props} />
+ReactDOM.render(element, rootElement)
+```
+Elemente können wie HTML Tags geschrieben werden und dann mit {} initialisiert werden
 
 ---
 
