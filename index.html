@@ -67,10 +67,15 @@ class: center, middle
 #Beispiel 1.1
 
 ```html
-
+const element = React.createElement('div', {
+  className: 'container',
+  children: 'Hello World',
+})
+console.log(element)
+ReactDOM.render(element, rootElement)
 ```
 
-TEXTTEXTTEXT!!!
+Element wird mit React erzeugt und anschließen auf dem Rootelement gerendert.
 
 ---
 
