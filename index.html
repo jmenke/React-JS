@@ -145,6 +145,38 @@ Nutzung dann einfach über
 <VariablenName>
 ```
 ---
+# Proptypes
+- Leute könnten eigene Komponenten falsch nutzen und so Fehler erhalten: __Proptypes!__
+- Mit __Funktion.propTypes__ können die __Parametertypen__ sowie die __Parameter Anzahl__
+festgelegt werden.
+- Einbinden des Pakets mit:
+```html
+<script src="https://unpkg.com/prop-types@15.6.0/prop-types.js"></script>
+```
+- Es wird dann eine Fehlermeldung bei falscher Nutzung der Komponente geworfen!
+---
+
+#Beispiel 4.1
+```javascript
+function SayHello(props) {
+  return (
+    <div>
+      Hello {props.firstName} {props.lastName}!
+    </div>
+  )
+}
+SayHello.propTypes = {
+  firstName: PropTypes.string.isRequired,
+  lastName: PropTypes.string.isRequired,
+}
+ReactDOM.render(
+  <SayHello firstName={true} />,
+  document.getElementById('root')
+)
+```
+- Bei Aufruf von __firstName=true__ wird jetzt ein Fehler ausgeworfen
+- Außerdem wird der User darauf hingewiesen, dass der __lastName__ noch fehlt
+---
 # Fazit
 
 ### ES6 bringt viele Neuerungen mit sich, die insbesondere den Code übersichtlicher und lesbarer machen
