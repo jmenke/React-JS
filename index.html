@@ -55,12 +55,10 @@ class: center, middle
 ---
 
 # createElements
-
-- React.createELement('typ', {<props>})
-- Die Methode bekommt den Elementtyp, der gebaut werden soll, und ein Objekt mit den Eigenschaften
+- __React.createELement('typ', {<props>})__
+- Die Methode bekommt den __Elementtyp__, der gebaut werden soll, und ein Objekt mit den __Eigenschaften__
 - Die Kinder (z.B. Strings) können per children: 'content' oder einfach kommasepariert angegben werden
-- ReactDOM.render(element, rootElement zum Darstellen des ELements
-
+- __ReactDOM.render(element, rootElement)__ zum Darstellen des ELements
 
 ---
 
@@ -76,6 +74,24 @@ ReactDOM.render(element, rootElement)
 ```
 
 Element wird mit React erzeugt und anschließen auf dem Rootelement gerendert.
+
+---
+
+# createElements mit JSX
+- babel zur JSX-Nutzung, Einbindung über
+```html
+	<script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+```
+- script type="text/babel"
+- Syntax: __```html <typ className="Name">children</typ> ```__
+- oder {} -> erlaubt es, hier __Javascript__ auszuführen
+- z.B. ein props-Objekt in Javascript mit dem Klassennamen und Kinder, wird übergeben mit __```html <typ {...props} /> ```__
+- wenn man Properties von außerhalb hinzufügt:
+	- eigene Props __links__ von den fremden Props werden benutzt, falls __keine vorhanden__ sind
+	- die Props __rechts__ davon __überschreiben__ die mitgelieferten
+---
+
+# Test
 
 ---
 
