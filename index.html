@@ -399,18 +399,60 @@ handleChange = event => {
 ```
 - So wird hier zur Laufzeit überprüft, ob ein Fehler existiert
 ---
+# HTTP Requests mit React
+
+- AJAX Anfragen kann man komfortabel mit der Axios Bibliothek ausführen. Einbinden mit:
+```html
+<script src="https://unpkg.com/axios@0.16.2/dist/axios.min.js"></script>
+``` 
+- Mit Axios kann dann eine Request gestartet werden: 
+```javascript
+   axios({
+      url: 'https://api.github.com/graphql',
+      method: 'post',
+      data: {
+        query: `{
+          user(login: "${this.props.username}") {
+            company
+          }
+        }`,
+      },
+      headers: {
+        Authorization: `bearer GENERIERTER KEY`,
+      },
+    }).
+```
+
+---
+- Nach der Abfrage kann man die erhaltenen Daten mit den ES6 Features verarbeiten:
+
+```javascript
+.then(
+      response => {
+        this.setState({
+          loaded: true,
+          company:
+            response.data.data.user.company,
+        })
+      },
+      error => {
+        this.setState({
+          error,
+          loaded: true,
+        })
+      },
+    )
+```
+
+---
 
 # Fazit
 
-### ES6 bringt viele Neuerungen mit sich, die insbesondere den Code übersichtlicher und lesbarer machen
-aber auch neue Funktionen beisteuern:
-- __const__ und __let__ ersetzen var, weswegen var nicht mehr benutzt werden muss!
-- __Strings__ sind einfacher zu nutzen
-- __Arrow-Funktionen__ können den Code drastisch kürzer machen
-- __Promises__ anstelle von Threads für zeitaufwendige Aufgaben
-- Für Arrays viele verschiedene __Funktionen__ zum Iterieren oder Finden von Werten
-- __Klassen__ für den objektorientierten Programmieransatz
-- ...
+### React ist eine effiziente und flexible JavaScript Bibliothek
+- Mit kann mit React ohne Probleme interaktive UIs erzeugen und mit wenig Aufwand eine Applikation erstellen
+- Es ist deklarativ. Reakt wird sich selbst Updaten sobald der Code geändert wurde.
+- Es ist Komponenten-basiert. Jede Komponenten kümmert sich um seinen eigenen State. Man kann Daten zwischen den Komponenten hin und herschicken, ohne die DOM-Elemente zu benutzen
+- Man kann JSX und Babel benutzen, um den Code live in Javascript-Form zu sehen
 
 
     </textarea>
