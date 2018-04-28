@@ -184,9 +184,166 @@ ReactDOM.render(
 - kann genutzt werden um mögliche Fehlereingaben zu behandeln
 
 # Beispiel 5.1
-
+```javascript
+function Message({message}) {
+  return (
+    <div>
+      {message ? (
+        <div>{message}</div>
+      ) : (
+        <div>No Message</div>
+      )}
+    </div>
+  )
+}
+```
+- Nicht nur if-Bedingungen möglich!
 
 ---
+
+# Rerendering einer React-App
+- mit __setIntervall(Funktion,Zeit)__ kann man die übergegebene Funktion periodisch ausführen lassen
+- Hilfreich um z.B Zeit o.ä. immer wieder zu erneuern.
+
+```javascript
+function tick() {
+  const time = new Date().toLocaleTimeString()
+  const element = (
+    <div>
+      It is
+      <input value={time} />
+      <input value={time} />
+    </div>
+  )
+  ReactDOM.render(element, rootElement)
+}
+tick()
+setInterval(tick, 1000)
+```
+-Hier wird __tick()__ immer wieder ausgeführt und damit auch __ReactDOM.render__!
+
+---
+# React-Komponenten Styling mit className und In-Line Styles
+- Man kann mithilfe eines Style-Blocks in der HTML die React-Komponenten verändern
+- Dazu wird der className auf den jeweiligen Style-Name gesetzt
+- Dadurch kann man zusätzlich mit In-Line Styles die Elemente nach belieben verändern
+- Die React-Komponenten können so mit viel Komfort mit Attributen belegt werden
+---
+#Beispiel 6.1
+
+```javascript
+function Box({
+  style,
+  size,
+  className = '',
+  ...rest
+}) {
+  const sizeClassName = size ? `box--${size}` : ''
+  return (
+    <div
+      className={`box ${className} ${sizeClassName}`}
+      style={{paddingLeft: 20, ...style}}
+      {...rest}
+    />
+  )
+}
+```
+```html
+const element = (
+  <div>
+    <Box
+      size="small"
+      style={{backgroundColor: 'lightblue'}}
+    >
+      small box
+    </Box>
+  </div>
+
+```
+---
+# Event-Handlers
+
+- Sehr viele Event-Handler möglich
+- Syntax: 
+```html
+<button onclick = {Funktion}>Bla</button>
+```
+- Funktionen werden mit dem Handler von React aufgerufen, der effizienter ist
+---
+# Beispiel 7.1
+```javascript
+function App() {
+  return (
+    <div>
+      <p>
+        There have been {state.eventCount} events
+      </p>
+      <p>
+        <button onClick={increment}>⚛️</button>
+      </p>
+      <p>You typed: {state.username}</p>
+      <p>
+        <input onChange={updateUsername} />
+      </p>
+    </div>
+  )
+}
+```
+
+- Hier werden die Listener onClick und onChange benutzt
+- Die Methoden der Handler wurden ausgelagert
+---
+#Komponenten-State nutzen
+
+- Jede Komponente hat ein State-Prop
+- Syntax:  state = {lapse: 0, running: false}
+- Zugriff mit __state.lapse__ oder __state.running__
+- Außerdem sind noch Methoden wie __setState__ verfügbar, mit dem man den State __dynamisch__ setzen kann
+---
+# Beispiel 8.1
+
+```javascript
+class StopWatch extends React.Component {
+  state = {lapse: 0, running: false}
+  handleRunClick = () => {
+    this.setState(state => {
+      if (state.running) {
+        clearInterval(this.timer)
+      } else {
+        const startTime =
+          Date.now() - this.state.lapse
+        this.timer = setInterval(() => {
+          this.setState({
+            lapse: Date.now() - startTime,
+          })
+        })
+      }
+      return {running: !state.running}
+    })
+  }
+  handleClearClick = () => {
+    clearInterval(this.timer)
+    this.setState({lapse: 0, running: false})
+  }
+  ...
+}
+```
+---
+# ComponentWillUnmount
+
+- Komponenten können Memory-Leaks auslösen, wenn sie während der Ausführung entfernt werden
+- Mit dem Aufrufen von __componentWillUnmount()__ kann man sich um das entfernen des Problem kümmern
+
+```javascript
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
+``` 
+
+- In dem Beispiel wird z.B der Timer von Beispiel 8.1 gecleared, wenn man die Komponente zur Laufzeit entfernt
+- So werden in der Konsole keine Warnungen mehr ausgeworfen
+---
+
 # Fazit
 
 ### ES6 bringt viele Neuerungen mit sich, die insbesondere den Code übersichtlicher und lesbarer machen
