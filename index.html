@@ -331,7 +331,7 @@ class StopWatch extends React.Component {
 ---
 # ComponentWillUnmount
 
-- Komponenten können Memory-Leaks auslösen, wenn sie während der Ausführung entfernt werden
+- Komponenten können __Memory-Leaks__ auslösen, wenn sie während der Ausführung entfernt werden
 - Mit dem Aufrufen von __componentWillUnmount()__ kann man sich um das entfernen des Problem kümmern
 
 ```javascript
@@ -340,8 +340,46 @@ class StopWatch extends React.Component {
   }
 ``` 
 
-- In dem Beispiel wird z.B der Timer von Beispiel 8.1 gecleared, wenn man die Komponente zur Laufzeit entfernt
+- In dem Beispiel wird z.B der Timer von Beispiel 8.1 gecleared, wenn man die Komponente zur __Laufzeit__ entfernt
 - So werden in der Konsole keine Warnungen mehr ausgeworfen
+---
+# DOM manipulieren mit React ref
+
+- Manchmal brauchen jQuery Plugins oder JS Bibliotheken eine DOM-Node auf der sie arbeiten können
+- Hierfür wird __ref__ von React bereitgestellt
+- Beispiel:
+```javascript
+	ref={node => (this.rootNode = node)}
+```
+- Dieses Prop kann dan automatisch genutzt werden, wenn Bibliotheken eine Node zum arbeiten brauchen.
+
+---
+# Beispiel 9.1
+```javascript
+class Tilt extends React.Component {
+  componentDidMount() {
+    VanillaTilt.init(this.rootNode, {
+      max: 25,
+      speed: 400,
+      glare: true,
+      'max-glare': 0.5,
+    })
+  }
+  render() {
+    return (
+      <div
+        ref={node => (this.rootNode = node)}
+        className="tilt-root"
+      >
+        <div className="tilt-child">
+          <div {...this.props} />
+        </div>
+      </div>
+    )
+  }
+}
+```
+- Es wird die root-Node als ref übergeben auf der die Tilt-Bibliothek arbeiten kann
 ---
 
 # Fazit
