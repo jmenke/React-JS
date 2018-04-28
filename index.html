@@ -381,6 +381,24 @@ class Tilt extends React.Component {
 ```
 - Es wird die root-Node als ref übergeben auf der die Tilt-Bibliothek arbeiten kann
 ---
+# Forms in React
+- Man kann das Default-Submit Event mit __event.preventDefault()__ verbieten
+- Mit dem __onChange-Prop__ von React kann man dynamisch auf Eingaben reagieren
+- So kann man zum Beispiel dynamisch Fehlermeldungen ausgeben 
+```javascript
+ onChange={this.handleChange}
+```
+- Hier mit wird bei jeder Veränderung die handleChange Methode aufgerufen:
+```javascript
+handleChange = event => {
+    const {value} = event.target
+    this.setState({
+      error: this.props.getErrorMessage(value),
+    })
+  }
+```
+- So wird hier zur Laufzeit überprüft, ob ein Fehler existiert
+---
 
 # Fazit
 
